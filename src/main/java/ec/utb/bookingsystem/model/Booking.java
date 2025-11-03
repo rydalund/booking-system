@@ -23,20 +23,15 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
     @Column(nullable = false)
     private String name;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Valid email is required")
     @Column(nullable = false)
     private String email;
 
-    @NotNull(message = "Date / time is required")
     @Column(nullable = false)
     private LocalDateTime dateTime;
 
-    @Min(value = 1, message = "Persons is required")
     @Column(nullable = false)
     private Integer numberOfPersons;
 
