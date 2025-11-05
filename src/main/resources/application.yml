@@ -1,0 +1,22 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: booking-system
+  datasource:
+    # Database connection settings - uses environment variables with fallback values
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:booking_db}
+    username: ${DB_USERNAME:postgres}      # Database username (default: postgres)
+    password: ${DB_PASSWORD:password}      # Database password (default: password)
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+server:
+  port: ${SERVER_PORT:8080}
