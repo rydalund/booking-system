@@ -19,7 +19,7 @@ services:
     networks:
       - backend-net
 
-  app-template: &app-template
+  app1:
     image: rydalund/booking-system-backend:1.2
     env_file: .env
     environment:
@@ -32,18 +32,24 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - backend-net
-
-  app1:
-    <<: *app-template
     ports:
       - "8081:8080"
     networks:
       - backend-net
 
   app2:
-    <<: *app-template
+    image: rydalund/booking-system-backend:1.2
+    env_file: .env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      SERVER_PORT: ${SERVER_PORT}
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8082:8080"
     networks:
